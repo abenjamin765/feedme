@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Feed Me</title>
+	<link rel="stylesheet" href="/css/style.css">
+	<link href='https://fonts.googleapis.com/css?family=Oleo+Script|Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+</head>
+<body>
+	<div id="wrapper">
+		<!-- Side Bar -->
+		<aside class="side-bar">
+			<!-- Logo -->
+			<h1 class="logo">
+				<span class="script">Feed</span>
+				<span class="sans">.me</span>
+			</h1>
+
+			<!-- Feed Name -->
+			<label for="feedName" class="eyebrow">Feed Name</label>
+			<input type="text" id="feedName" value="feed" placeholder="Name your feed">
+
+			<!-- Options -->
+			<a href="#" class="btn btn-add">Add Value</a>
+			<p class="split"><span>or</span></p>
+			<a href="#" class="drop-down">Choose a preset</a>
+
+			<!-- Inputs -->
+			<section class="block">
+				<label for="itemNumber" class="eyebrow"># of items</label>
+				<input type="text" id="itemNumber" class="number" value="1">
+			</section>
+			
+			<!-- Block -->
+			<section class="block">
+				<a href="#" class="close">✕</a><span class="node-name">firstName</span>
+				<input type="checkbox" id="firstName" name="toggles" class="toggle-switch" checked>
+				<label class="toggle" for="firstName"><span></span></label>
+				
+				<!-- Options -->
+				<div class="options">
+					<div class="options--frame">
+
+						<!-- Type -->
+						<label for="type" class="eyebrow">Type</label>
+						<a href="#" class="drop-down">First Name</a>
+						
+						<!-- Gender	 -->
+						<span class="eyebrow">Gender</span>
+						<ul class="radio-list">
+							<li><input type="radio" name="gender" id="both"><label for="both">Both</label></li>
+							<li><input type="radio" name="gender" id="male"><label for="male">Male</label></li>
+							<li><input type="radio" name="gender" id="female"><label for="female">Female</label></li>
+						</ul>
+
+					</div>
+				</div>
+			</section>
+
+			<!-- Block -->
+			<section class="block">
+				<a href="#" class="close">✕</a><span class="node-name">lastName</span>
+				<input type="checkbox" id="lastName" name="toggles" class="toggle-switch">
+				<label class="toggle" for="lastName"><span></span></label>
+				
+				<!-- Options -->
+				<div class="options">
+					<div class="options--frame">
+
+						<!-- Type -->
+						<label for="type" class="eyebrow">Type</label>
+						<a href="#" class="drop-down">Last Name</a>
+
+					</div>
+				</div>
+			</section>
+	
+		</aside>
+
+		<!-- Main Stage -->
+		<main>
+			<div class="utility-bar">
+				<div  class="feed-type">JSON</div>
+				<nav>
+					<a href="#">New Feed</a>
+					<a href="#">Help</a>
+				</nav>
+			</div>
+			<pre class="slab">
+				<code>1 {feed}</code>
+			</pre>
+			<div class="path">
+				<input type="text" id="path--field" value="http://feed.me/ifey87ty48yfh893">
+				<a href="#">Copy</a>
+			</div>	
+		</main>
+
+		<!-- Side footer -->
+		<footer>
+			Created by Aaron Benjamin
+		</footer>
+	</div>
+</body>
+</html>
