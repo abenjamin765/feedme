@@ -44,6 +44,9 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+a:focus, button:focus, input:focus{
+	outline: none;
+}
 
 /*-----------------
 Global
