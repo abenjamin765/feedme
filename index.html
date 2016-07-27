@@ -18,7 +18,7 @@
 
 			<!-- Feed Name -->
 			<label for="feedName" class="eyebrow">Feed Name</label>
-			<input type="text" id="feedName" value="feed" placeholder="Name your feed">
+			<input type="text" id="feedName" value="Feed" placeholder="Name your feed">
 
 			<!-- Options -->
 			<a href="#" class="btn btn-add">Add Value</a>
@@ -87,11 +87,11 @@
 				</nav>
 			</div>
 			<pre class="slab">
-				<code>{<br>&nbsp;&nbsp;"feed": {<br><br>&nbsp;&nbsp;}<br>}</code>
+				<code id="codeField"></code>
 			</pre>
 			<div class="path">
-				<input type="text" id="path--field" value="http://feed.me/ifey87ty48yfh893">
-				<a href="#">Copy</a>
+				<input type="text" id="path--field">
+				<a href="#" id="copyButton" onclick="copyLink()">Copy</a>
 			</div>	
 		</main>
 
@@ -100,5 +100,9 @@
 			Created by Aaron Benjamin
 		</footer>
 	</div>
+
+	<script src="js/jquery.min.js"></script>
+	<script src="js/feedme.js"></script>
+
 </body>
 </html>
