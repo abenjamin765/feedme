@@ -4,7 +4,6 @@
 	<meta charset="UTF-8">
 	<title>Feed Me</title>
 	<link rel="stylesheet" href="css/style.css">
-	<link href='https://fonts.googleapis.com/css?family=Oleo+Script|Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
 </head>
 <body>
 	<div id="wrapper">
@@ -21,14 +20,15 @@
 			<input type="text" id="feedName" value="Feed" placeholder="Name your feed">
 
 			<!-- Options -->
-			<a href="#" class="btn btn-add">Add Value</a>
+			<a href="#" class="btn btn-add" onclick="addValue()">Add Value</a>
+			<a href="#" class="btn btn-remove" onclick="removeValue()">Remove Value</a>
 			<p class="split"><span>or</span></p>
 			<a href="#" class="drop-down">Choose a preset</a>
 
 			<!-- Inputs -->
 			<section class="block">
 				<label for="itemNumber" class="eyebrow"># of items</label>
-				<input type="text" id="itemNumber" class="number" value="1">
+				<input type="text" id="itemNumber" class="number" value="2">
 			</section>
 			
 			<!-- Block -->
@@ -94,11 +94,7 @@
 				<a href="#" id="copyButton" onclick="copyLink()">Copy</a>
 			</div>	
 		</main>
-
-		<!-- Side footer -->
-		<footer>
-			Created by Aaron Benjamin
-		</footer>
+		<div class="footer"><p>Created by Aaron Benjamin</p></div>
 	</div>
 
 	<script src="js/jquery.min.js"></script>

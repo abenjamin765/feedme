@@ -1,4 +1,9 @@
 /*-----------------
+FONT
+-----------------*/
+@import url(https://fonts.googleapis.com/css?family=Oleo+Script|Open+Sans:400,300,700);
+
+/*-----------------
 RESET
 -----------------*/
 
@@ -85,17 +90,31 @@ Buttons
 	cursor: pointer;
 }
 
-.btn-add:after, .drop-down:after{
-	content: '╋';
+.btn-remove{
+	background: #aaa;
+}
+
+.btn-add:after, .btn-remove:after, .drop-down:after{
 	position: absolute;
 	right: 0;
 	top: 0;
-	line-height: 40px;
 	text-align: center;
 	box-sizing: border-box;
 	width: 40px;
-	font-size: 14px;
+	height: 40px;
 	background: rgba(0,0,0,0.1);
+}
+
+.btn-add:after{
+	content: '+';
+	font-size: 20px;
+	line-height: 40px;
+}
+
+.btn-remove:after{
+	content: '-';
+	font-size: 24px;
+	line-height: 36px;
 }
 
 .drop-down{
@@ -115,7 +134,7 @@ Buttons
 Wrapper
 -----------------*/
 #wrapper{
-	width: 1260px;
+	max-width: 980px;
 	margin: 0 auto;
 	overflow: hidden;
 }
@@ -407,13 +426,23 @@ main .path a{
 /*-----------------
 Footer
 -----------------*/
-footer{
-	float: left;
-	width: 300px;
-	padding: 20px;
-	box-sizing: border-box;
-	text-align: right;
-	font-size: 12px;
+
+.footer{
+	display: inline-block;
+	width: 620px;
+	text-align: center;
+	margin: 10px auto;
+}
+
+.footer p{
+	text-align: center;
+	width: 200px;
+	margin: 0 auto;
+	padding: 20px 0;
+	font-size: 13px;
+	color: #666;
+	font-weight: 300;
+	border-top: 1px solid #ccc;
 }
 
 
