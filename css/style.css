@@ -1,4 +1,9 @@
 /*-----------------
+FONT
+-----------------*/
+@import url(https://fonts.googleapis.com/css?family=Oleo+Script|Open+Sans:400,300,700);
+
+/*-----------------
 RESET
 -----------------*/
 
@@ -86,16 +91,20 @@ Buttons
 }
 
 .btn-add:after, .drop-down:after{
-	content: '╋';
 	position: absolute;
 	right: 0;
 	top: 0;
-	line-height: 40px;
 	text-align: center;
 	box-sizing: border-box;
 	width: 40px;
-	font-size: 14px;
+	height: 40px;
 	background: rgba(0,0,0,0.1);
+}
+
+.btn-add:after{
+	content: '+';
+	font-size: 20px;
+	line-height: 40px;
 }
 
 .drop-down{
@@ -108,6 +117,8 @@ Buttons
 .drop-down:after{
 	content: '▾';
 	background: none;
+	font-size: 14px;
+	line-height: 40px;
 }
 
 
@@ -115,7 +126,7 @@ Buttons
 Wrapper
 -----------------*/
 #wrapper{
-	width: 1260px;
+	max-width: 980px;
 	margin: 0 auto;
 	overflow: hidden;
 }
@@ -348,6 +359,7 @@ main .utility-bar .feed-type{
 main .utility-bar nav{
 	float: right;
 }
+
 main .utility-bar nav a{
 	font-size: 12px;
 	text-transform: uppercase;
@@ -355,22 +367,36 @@ main .utility-bar nav a{
 	color: #FF0078;
 	margin-left: 10px;
 }
+
 main .slab{
 	background: #333;
 	white-space: normal;
 	min-height: 500px;	
+<<<<<<< HEAD
 	overflow-y: scroll;
 
+=======
+>>>>>>> gh-pages
 }
 
 main .slab code{
 	color: white;
 	font-family: courier;
+	font-weight: 200;
 	font-size: 12px;
 	padding: 20px;
 	display: block;
 	line-height: 20px;
+}
 
+main .slab span{
+	color: #FF77AA;
+}
+
+main .slab b{
+	font-size: 16px;
+	font-family: courier;
+	color: #FF77AA;
 }
 
 main .path{
@@ -408,13 +434,35 @@ main .path a{
 /*-----------------
 Footer
 -----------------*/
-footer{
-	float: left;
-	width: 300px;
-	padding: 20px;
-	box-sizing: border-box;
-	text-align: right;
-	font-size: 12px;
+
+.footer{
+	display: inline-block;
+	width: 620px;
+	text-align: center;
+	margin: 10px auto;
+}
+
+.footer hr{
+	width: 60px;
+	color: #ccc;
+	border: 0px;
+	border-top: 1px solid #aaa;
+}
+
+.footer p{
+	text-align: center;
+	max-width: 400px;
+	margin: 0 auto;
+	padding: 10px 0;
+	font-size: 13px;
+	color: #666;
+	font-weight: 300;
+}
+
+.footer a{
+	font-weight: 500;
+	color: #444;
+	text-decoration: none;
 }
 
 
