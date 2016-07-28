@@ -371,7 +371,7 @@ main .utility-bar nav a{
 main .slab{
 	background: #333;
 	white-space: normal;
-	min-height: 500px;	
+	/*min-height: 500px;	*/
 }
 
 main .slab code{
@@ -392,6 +392,12 @@ main .slab b{
 	font-size: 16px;
 	font-family: courier;
 	color: #FF77AA;
+}
+
+main .slab #codeField{
+	overflow-y: scroll;
+	height: 500px;
+
 }
 
 main .path{
