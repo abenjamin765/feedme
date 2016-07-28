@@ -20,8 +20,8 @@
 			<input type="text" id="feedName" value="Feed" placeholder="Name your feed">
 
 			<!-- Options -->
-			<a href="#" class="btn btn-add" onclick="addValue()">Add Value</a>
-			<a href="#" class="btn btn-remove" onclick="removeValue()">Remove Value</a>
+			<a href="javascript:addValue()" class="btn btn-add">Add Value</a>
+			<a href="javascript:removeValue()" class="btn btn-remove">Remove Value</a>
 			<p class="split"><span>or</span></p>
 			<a href="#" class="drop-down">Choose a preset</a>
 
@@ -82,8 +82,8 @@
 			<div class="utility-bar">
 				<div  class="feed-type">JSON</div>
 				<nav>
-					<a href="#">New Feed</a>
-					<a href="#">Help</a>
+					<a href="javascript:newFeed()">New Feed</a>
+					<a href="javascript:toggleHelp()">Help</a>
 				</nav>
 			</div>
 			<pre class="slab">

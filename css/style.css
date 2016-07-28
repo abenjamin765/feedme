@@ -127,6 +127,8 @@ Buttons
 .drop-down:after{
 	content: '▾';
 	background: none;
+	font-size: 14px;
+	line-height: 40px;
 }
 
 
@@ -367,6 +369,7 @@ main .utility-bar .feed-type{
 main .utility-bar nav{
 	float: right;
 }
+
 main .utility-bar nav a{
 	font-size: 12px;
 	text-transform: uppercase;
@@ -374,21 +377,26 @@ main .utility-bar nav a{
 	color: #FF0078;
 	margin-left: 10px;
 }
+
 main .slab{
 	background: #333;
 	white-space: normal;
 	min-height: 500px;	
-
 }
 
 main .slab code{
 	color: white;
 	font-family: courier;
+	font-weight: 200;
 	font-size: 12px;
 	padding: 20px;
 	display: block;
 	line-height: 20px;
+}
 
+main .slab b{
+	font-size: 16px;
+	font-family: courier;
 }
 
 main .path{
