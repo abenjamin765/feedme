@@ -3,7 +3,8 @@
 
 // INITIAL VARIABLES
 var feedName = "Feed";
-var itemArray = ["First Name", "Last Name"];
+var itemArray = ["fullName", "firstName", "lastName", "email", "twitter", "phone"];
+var itemDetailArray = ["both", "male", "none", "none", "none", "uk"];
 var valueArray = ["0", "1"];
 var helpToggle = false;
 
@@ -27,7 +28,6 @@ $('#feedName').focusin('input',function(e){
 			var value = $("#feedName").val();
 			value = value.split(' ').join('');
 			value = value.replace(/[^A-Za-z\s!?]/g,'');
-			$("#feedName").val(value);
 
 		    if(value != ""){
 		  		feedName = value;
@@ -104,12 +104,12 @@ $('#itemNumber').focusout('input',function(e){
 // RESET FEED
 function newFeed(){
 	feedName = "Feed";
-	itemAmount = 2;
-	itemArray = [];
+	itemArray = ["fullName", "firstName", "lastName", "email", "twitter", "phone"];
+	itemDetailArray = ["both", "male", "none", "none", "none", "uk"];
 	valueArray = ["0", "1"];
 	helpToggle = false;
 
-	$("#itemNumber").val(itemAmount);
+	$("#itemNumber").val(itemArray.length);
 	$("#feedName").val(feedName);
 
 	generateUniqueURL();
@@ -161,15 +161,57 @@ function updateFeed(){
 
 			for(var j = 0;j < itemArray.length;j+=1){
 				var itemType = itemArray[j];
-			    if(itemType == "First Name"){
-			    	var name = chance.name();
+				var itemDetail = itemDetailArray[j];
+			    if(itemType == "fullName"){
+			    	if(itemDetail == "male"){
+			    		var name = chance.name({ gender: "male" });
+			    	}else if(itemDetail == "female"){
+			    		var name = chance.name({ gender: "female" });
+			    	}else{
+			    		var name = chance.name();
+			    	}
+					finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<span>Full Name</span>": "' + name + '"';
+			    }else if(itemType == "firstName"){
+			    	if(itemDetail == "male"){
+			    		var name = chance.name({ gender: "male" });
+			    	}else if(itemDetail == "female"){
+			    		var name = chance.name({ gender: "female" });
+			    	}else{
+			    		var name = chance.name();
+			    	}
 					name = name.substring(0, name.indexOf(' '));
-					finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<span>First Name</span>": "' + name + '",<br>';
-			    }else if(itemType == "Last Name"){
+					finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<span>firstName</span>": "' + name + '"';
+			    }else if(itemType == "lastName"){
 			    	var name = chance.name();
 					name = name.split(' ')[1];
-					finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<span>Last Name</span>": "' + name + '",<br>';
+					finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<span>lastName</span>": "' + name + '"';
+			    }else if(itemType == "email"){
+			    	var firstName = chance.name();
+			    	firstName = firstName.substring(0, firstName.indexOf(' '));
+			    	firstName = firstName.toLowerCase();
+			    	firstName = firstName.charAt(0);
+			    	var lastName = chance.name();
+			    	lastName = lastName.split(' ')[1];
+			    	var email = firstName + lastName + "@example.com";
+					finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<span>email</span>": "' + email + '"';
+			    }else if(itemType == "twitterHandle"){
+			    	var username = chance.twitter();
+					finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<span>twitterHandle</span>": "' + username + '"';
+			    }else if(itemType == "phone"){
+			    	if(itemDetail == "uk"){
+			    		var phone = chance.phone({ country: 'uk', mobile: true });
+			    	}else if(itemDetail == "de"){
+			    		var phone = chance.phone({ country: 'de', mobile: true });
+			    	}else{
+			    		var phone = chance.phone({ country: 'us', mobile: true });
+			    	}
+					finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<span>phone</span>": "' + phone + '"';
 			    }
+			    if(j+1 == itemArray.length){
+					finalJSON = finalJSON + '<br>';
+				}else{
+					finalJSON = finalJSON + ',<br>';
+				}
 			}
 
 			finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}';
