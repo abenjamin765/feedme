@@ -3,8 +3,7 @@
 
 // INITIAL VARIABLES
 var feedName = "Feed";
-var itemAmount = 2;
-var itemArray = [];
+var itemArray = ["First Name", "Last Name"];
 var valueArray = ["0", "1"];
 var helpToggle = false;
 
@@ -53,27 +52,15 @@ $('#feedName').focusout('input',function(e){
 
 });
 
-// VALUE BUTTONS
+// VALUES
 function addValue(){
-	valueAmount = valueArray.length += 1;
-	updateValues(valueAmount);
+	
+
 }
 
 function removeValue(){
-	if(valueArray.length > 0){
-		valueAmount = valueArray.length -= 1;
-		updateValues(valueAmount);
-	}
-}
 
-function updateValues(valueAmount){
-	valueArray = [];
-	for(var i = 0; i < valueAmount; i+=1){
 
-		valueArray.push('"' + i + '"');
-
-	}
-	updateFeed();
 }
 
 // ITEM NUMBER
@@ -87,14 +74,19 @@ $('#itemNumber').focusin('input',function(e){
 			$("#itemNumber").val(value);
 
 		    if(value != ""){
-		    	itemAmount = value;
+		    	valueArray = [];
+				for(var i = 0; i < value; i+=1){
+
+					valueArray.push('"' + i + '"');
+
+				}
 		    }else{
 		  		
 		    }
 
 		  	updateFeed();
 
-		},500);
+		},300);
 	});
 });
 
@@ -103,7 +95,7 @@ $('#itemNumber').focusout('input',function(e){
 	var value = $("#itemNumber").val();
 	if(value == ""){
 		$("#itemNumber").val("2");
-		itemAmount = 2;
+		valueArray = ["0", "1"];
 		updateFeed();
 	}
 
@@ -128,7 +120,7 @@ function newFeed(){
 function toggleHelp(){
 	if(helpToggle == false){
 		helpToggle = true;
-		var helpText = "<b>Welcome to Feed.Me help</b><br><span>Note: To go back to your feed press the help button again</span><br><br><b>What is Feed.Me for?</b><br><span>Feed.Me is a tool for developers and designers, you can simply and easily generate spoof JSON data, which is hosted on Feed.Me or you can download as a json file. This helps prototyping and testing if your code would work with real JSON data.</span>";
+		var helpText = "<b>Welcome to Feed.Me help</b><br>Note: To go back to your feed press the help button again<br><br><b>What is Feed.Me for?</b><br>Feed.Me is a tool for developers and designers, you can simply and easily generate spoof JSON data, which is hosted on Feed.Me or you can download as a json file. This helps prototyping and testing if your code would work with real JSON data.";
 		document.getElementById("codeField").innerHTML = helpText;
 	}else{
 		helpToggle = false;
@@ -157,22 +149,43 @@ function updateFeed(){
 	if(helpToggle == false){
 
 		var finalJSON = "";
+		var beginning = "";
 
-		var beginning = '{<br>&nbsp;&nbsp;"' + feedName + '": {<br>';
+		beginning = '{<br>&nbsp;&nbsp;"<span>' + feedName + '</span>": [<br>&nbsp;&nbsp;&nbsp;&nbsp;{<br>';
 		finalJSON = beginning;
 
 		valueAmount = valueArray.length;
 		for(var i = 0; i < valueArray.length; i+=1){
 
-			finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;"' + i + '": {<br><br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>';
+			finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<span>' + i + '</span>": {<br>';
+
+			for(var j = 0;j < itemArray.length;j+=1){
+				var itemType = itemArray[j];
+			    if(itemType == "First Name"){
+			    	var name = chance.name();
+					name = name.substring(0, name.indexOf(' '));
+					finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<span>First Name</span>": "' + name + '",<br>';
+			    }else if(itemType == "Last Name"){
+			    	var name = chance.name();
+					name = name.split(' ')[1];
+					finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<span>Last Name</span>": "' + name + '",<br>';
+			    }
+			}
+
+			finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}';
+
+			if(i+1 == valueArray.length){
+				finalJSON = finalJSON + '<br>';
+			}else{
+				finalJSON = finalJSON + ',<br>';
+			}
 
 		}
 		if(valueAmount == 0){
 			finalJSON = finalJSON + '<br>';
 		}
-		var end = "&nbsp;&nbsp;}<br>}";
+		var end = "&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;]<br>}";
 		finalJSON = finalJSON + end;
-
 		document.getElementById("codeField").innerHTML = finalJSON;
 
 	}

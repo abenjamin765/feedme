@@ -4,6 +4,9 @@
 	<meta charset="UTF-8">
 	<title>Feed Me</title>
 	<link rel="stylesheet" href="css/style.css">
+
+	<!-- JS - PRETTIFY.JS -->
+	<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?skin=sunburst"></script>
 </head>
 <body>
 	<div id="wrapper">
@@ -19,20 +22,19 @@
 			<label for="feedName" class="eyebrow">Feed Name</label>
 			<input type="text" id="feedName" value="Feed" placeholder="Name your feed">
 
-			<!-- Options -->
-			<a href="javascript:addValue()" class="btn btn-add">Add Value</a>
-			<a href="javascript:removeValue()" class="btn btn-remove">Remove Value</a>
-			<p class="split"><span>or</span></p>
-			<a href="#" class="drop-down">Choose a preset</a>
-
-			<!-- Inputs -->
-			<section class="block">
+			<!-- # of items -->
+			<section class="block" style="border-top: none; margin-top: -20px;">
 				<label for="itemNumber" class="eyebrow"># of items</label>
 				<input type="text" id="itemNumber" class="number" value="2">
 			</section>
 			
+			<section class="block">
+				<a href="javascript:addValue()" class="btn btn-add" style="margin: 0px;">Add Value</a>
+			</section>
+
 			<!-- Block -->
 			<section class="block">
+
 				<a href="#" class="close">✕</a><span class="node-name">firstName</span>
 				<input type="checkbox" id="firstName" name="toggles" class="toggle-switch" checked>
 				<label class="toggle" for="firstName"><span></span></label>
@@ -90,14 +92,15 @@
 				<code id="codeField"></code>
 			</pre>
 			<div class="path">
-				<input type="text" id="path--field">
+				<input type="text" id="path--field" readonly>
 				<a href="#" id="copyButton" onclick="copyLink()">Copy</a>
 			</div>	
 		</main>
-		<div class="footer"><p>Created by Aaron Benjamin</p></div>
+		<div class="footer"><hr><p>Created by <a target="blank_" href="https://twitter.com/aBenjamin765">@aBenjamin765</a> and <a target="blank_" href="https://twitter.com/seven11nash">@seven11nash</a></p></div>
 	</div>
 
 	<script src="js/jquery.min.js"></script>
+	<script src="js/chance.min.js"></script>
 	<script src="js/feedme.js"></script>
 
 </body>
