@@ -3,7 +3,7 @@
 
 // INITIAL VARIABLES
 var feedName = "Feed";
-var itemArray = ["fullName", "firstName", "lastName", "email", "twitter", "phone"];
+var itemArray = ["fullName", "firstName", "lastName", "email", "twitterHandle", "phone"];
 var itemDetailArray = ["both", "male", "none", "none", "none", "uk"];
 var valueArray = ["0", "1"];
 var helpToggle = false;
