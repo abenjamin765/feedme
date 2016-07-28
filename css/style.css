@@ -437,8 +437,8 @@ Footer
 -----------------*/
 
 .footer{
-	display: block;
-	width: 100%;
+	display: inline-block;
+	width: 620px;
 	text-align: center;
 	margin: 10px auto;
 }
