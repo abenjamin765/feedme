@@ -359,6 +359,7 @@ main .slab{
 	background: #333;
 	white-space: normal;
 	min-height: 500px;	
+	overflow-y: scroll;
 
 }
 
