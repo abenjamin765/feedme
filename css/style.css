@@ -299,7 +299,7 @@ Block
 
 .toggle-switch:checked ~ .options{
 	display: block;
-	height: 200px;
+	height: 120px;
 }
 
 .block .drop-down{
@@ -397,7 +397,6 @@ main .slab b{
 main .slab #codeField{
 	overflow-y: scroll;
 	height: 500px;
-
 }
 
 main .path{
@@ -437,10 +436,11 @@ Footer
 -----------------*/
 
 .footer{
-	display: inline-block;
+	display: block;
+	float: right;
 	width: 620px;
 	text-align: center;
-	margin: 10px auto;
+	margin: 5px 20px 10px 0;
 }
 
 .footer hr{
