@@ -20,7 +20,7 @@
 
 			<!-- Feed Name -->
 			<label for="feedName" class="eyebrow">Feed Name</label>
-			<input type="text" id="feedName" value="feed" placeholder="Name your feed">
+			<input type="text" id="feedName" placeholder="Name your feed">
 
 			<!-- # of items -->
 			<section class="block">
@@ -85,10 +85,10 @@
 		<!-- Main Stage -->
 		<main>
 			<div class="utility-bar">
-				<div  class="feed-type">JSON</div>
+				<div  class="feed-type" id="feedTypeTitle">JSON</div>
 				<nav>
-					<a href="javascript:newFeed()">New Feed</a>
-					<a href="javascript:toggleHelp()">Help</a>
+					<a href="javascript:newFeed()" id="newFeed">New Feed</a>
+					<a href="javascript:toggleHelp()" id="helpLink">Help</a>
 				</nav>
 			</div>
 			<pre class="slab">

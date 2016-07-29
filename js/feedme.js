@@ -2,7 +2,7 @@
 // CODE WRITTEN BY MARC MUELLER (@seven11nash)
 
 // INITIAL VARIABLES
-var feedName = "feed";
+var feedName = "feedMe";
 var itemArray = [];
 var itemDetailArray = [];
 var valueArray = ["0", "1"];
@@ -58,7 +58,7 @@ $('#feedName').focusin('input',function(e){
 		    if(value != ""){
 		  		feedName = value;
 		    }else{
-		  		feedName = "Feed";
+		  		feedName = "feedMe";
 		    }
 
 		  	updateFeed();
@@ -71,8 +71,7 @@ $('#feedName').focusout('input',function(e){
 
 	var value = $("#feedName").val();
 	if(value == ""){
-		$("#feedName").val("Feed");
-		feedName = "Feed";
+		feedName = "feedMe";
 		updateFeed();
 	}
 
@@ -90,7 +89,7 @@ function addValue(){
 	if(selectedValue == "phone"){
 		itemDetailArray.push("us");
 	}else if(selectedValue == "age"){
-		// ad, cd, sn
+		// ad, cd, tn, sn
 		itemDetailArray.push("ad");
 	}else{
 		itemDetailArray.push("none");
@@ -99,7 +98,7 @@ function addValue(){
 	if(selectedValue == "phone"){
 		$("#valueWrapper").append('<section class="block" id="valueBlock' + id +'"><a href="javascript:removeValue(' + id + ')" class="close">✕</a><span class="node-name">' + selectedValue + '</span><input type="checkbox" id="phoneNumber' + id + '" name="toggles" class="toggle-switch" checked><label class="toggle" for="phoneNumber' + id + '"><span></span></label><div class="options"><div class="options--frame"><span class="eyebrow">Country</span><ul class="radio-list"><li><input type="radio" name="phone' + id + '" onclick="updateItemDetail(this.id)" id="us' + id + '" checked><label for="us">US</label></li><li><input type="radio" name="phone' + id + '" onclick="updateItemDetail(this.id)" id="uk' + id + '"><label for="uk">UK</label></li><li><input type="radio" name="phone' + id + '" onclick="updateItemDetail(this.id)" id="de' + id + '"><label for="de">DE</label></li></ul></div></div></section>');
 	}else if(selectedValue == "age"){
-		$("#valueWrapper").append('<section class="block" id="valueBlock' + id +'"><a href="javascript:removeValue(' + id + ')" class="close">✕</a><span class="node-name">' + selectedValue + '</span><input type="checkbox" id="age' + id + '" name="toggles" class="toggle-switch" checked><label class="toggle" for="age' + id + '"><span></span></label><div class="options"><div class="options--frame"><span class="eyebrow">boundries</span><ul class="radio-list"><li><input type="radio" name="age' + id + '" onclick="updateItemDetail(this.id)" id="ad' + id + '" checked><label for="ad">Adult</label></li><li><input type="radio" name="age' + id + '" onclick="updateItemDetail(this.id)" id="cd' + id + '"><label for="cd">Child</label></li><li><input type="radio" name="age' + id + '" onclick="updateItemDetail(this.id)" id="sn' + id + '"><label for="sn">Senior</label></li></ul></div></div></section>');
+		$("#valueWrapper").append('<section class="block" id="valueBlock' + id +'"><a href="javascript:removeValue(' + id + ')" class="close">✕</a><span class="node-name">' + selectedValue + '</span><input type="checkbox" id="age' + id + '" name="toggles" class="toggle-switch" checked><label class="toggle" for="age' + id + '"><span></span></label><div class="options"><div class="options--frame"><span class="eyebrow">boundries</span><ul class="radio-list"><li><input type="radio" name="age' + id + '" onclick="updateItemDetail(this.id)" id="ad' + id + '" checked><label for="ad">Adult</label></li><li><input type="radio" name="age' + id + '" onclick="updateItemDetail(this.id)" id="cd' + id + '"><label for="cd">Child</label></li><li><input type="radio" name="age' + id + '" onclick="updateItemDetail(this.id)" id="tn' + id + '"><label for="tn">Teenager</label></li><li><input type="radio" name="age' + id + '" onclick="updateItemDetail(this.id)" id="sn' + id + '"><label for="sn">Senior</label></li></ul></div></div></section>');
 	}else{
 		$("#valueWrapper").append('<section class="block" id="valueBlock' + id +'"><a href="javascript:removeValue(' + id + ')" class="close">✕</a><span class="node-name">' + selectedValue + '</span></section>');
 	}
@@ -121,7 +120,7 @@ function removeValue(id){
 				$("#valueWrapper").append('<section class="block" id="valueBlock' + i +'"><a href="javascript:removeValue(' + i + ')" class="close">✕</a><span class="node-name">' + itemArray[i] + '</span><input type="checkbox" id="phoneNumber' + i + '" name="toggles" class="toggle-switch" checked><label class="toggle" for="phoneNumber' + i + '"><span></span></label><div class="options"><div class="options--frame"><span class="eyebrow">Country</span><ul class="radio-list"><li><input type="radio" name="phone' + i + '" onclick="updateItemDetail(this.id)" id="us' + i + '" checked><label for="us">US</label></li><li><input type="radio" name="phone' + i + '" onclick="updateItemDetail(this.id)" id="uk' + i + '"><label for="uk">UK</label></li><li><input type="radio" name="phone' + i + '" onclick="updateItemDetail(this.id)" id="de' + i + '"><label for="de">DE</label></li></ul></div></div></section>');
 				document.getElementById(itemDetailArray[i] + i).checked = true;
 			}else if(itemArray[i] == "age"){
-				$("#valueWrapper").append('<section class="block" id="valueBlock' + i +'"><a href="javascript:removeValue(' + i + ')" class="close">✕</a><span class="node-name">' + itemArray[i] + '</span><input type="checkbox" id="age' + i + '" name="toggles" class="toggle-switch" checked><label class="toggle" for="age' + i + '"><span></span></label><div class="options"><div class="options--frame"><span class="eyebrow">boundries</span><ul class="radio-list"><li><input type="radio" name="age' + i + '" onclick="updateItemDetail(this.id)" id="ad' + i + '" checked><label for="ad">Adult</label></li><li><input type="radio" name="age' + i + '" onclick="updateItemDetail(this.id)" id="cd' + i + '"><label for="cd">Child</label></li><li><input type="radio" name="age' + i + '" onclick="updateItemDetail(this.id)" id="sn' + i + '"><label for="sn">Senior</label></li></ul></div></div></section>');
+				$("#valueWrapper").append('<section class="block" id="valueBlock' + i +'"><a href="javascript:removeValue(' + i + ')" class="close">✕</a><span class="node-name">' + itemArray[i] + '</span><input type="checkbox" id="age' + i + '" name="toggles" class="toggle-switch" checked><label class="toggle" for="age' + i + '"><span></span></label><div class="options"><div class="options--frame"><span class="eyebrow">boundries</span><ul class="radio-list"><li><input type="radio" name="age' + i + '" onclick="updateItemDetail(this.id)" id="ad' + i + '" checked><label for="ad">Adult</label></li><li><input type="radio" name="age' + i + '" onclick="updateItemDetail(this.id)" id="cd' + i + '"><label for="cd">Child</label></li><li><input type="radio" name="age' + i + '" onclick="updateItemDetail(this.id)" id="tn' + i + '"><label for="tn">Teenager</label></li><li><input type="radio" name="age' + i + '" onclick="updateItemDetail(this.id)" id="sn' + i + '"><label for="sn">Senior</label></li></ul></div></div></section>');
 			}else{
 				$("#valueWrapper").append('<section class="block" id="valueBlock' + i +'"><a href="javascript:removeValue(' + i + ')" class="close">✕</a><span class="node-name">' + itemArray[i] + '</span></section>');
 			}
@@ -188,7 +187,7 @@ $('#itemNumber').focusout('input',function(e){
 
 // RESET FEED
 function newFeed(){
-	feedName = "feed";
+	feedName = "feedMe";
 	itemArray = ["phone"];
 	itemDetailArray = ["us"];
 	valueArray = ["0", "1"];
@@ -209,10 +208,16 @@ function newFeed(){
 function toggleHelp(){
 	if(helpToggle == false){
 		helpToggle = true;
-		var helpText = '<b>Welcome to Feed.Me help</b><br>Note: To go back to your feed press the help button again<br><br><b>What is Feed.Me for?</b><br>Feed.Me is a tool for developers and designers, you can simply and easily generate spoof JSON data, which is hosted on Feed.Me or you can download as a json file. This helps prototyping and testing if your code would work with real JSON data.<br><br><b>How do I pull data from the downloaded json? (Js)</b><br>$.getJSON("path/to/feed.json", function(json) {<br>&nbsp;&nbsp;console.log("JSON Data: " + json.feed[1].fullName);<br>});';
+		var helpText = '<b>Welcome to Feed.Me help</b><br>Note: To go back to your feed press the help button again<br><br><b>What is Feed.Me for?</b><br>Feed.Me is a tool for developers and designers, you can simply and easily generate spoof JSON data, which is hosted on Feed.Me or you can download as a json file. This helps prototyping and testing if your code would work with real JSON data.<br><br><b>How do I pull data from the downloaded json? (Js)</b><br>$.getJSON("path/to/feedMe.json", function(json) {<br>&nbsp;&nbsp;console.log("JSON Data: " + json.feedMe[1].fullName);<br>});';
 		document.getElementById("codeField").innerHTML = helpText;
+		document.getElementById("feedTypeTitle").innerHTML = "Feed.Me Help";
+		$("#newFeed").css("display", "none");
+		document.getElementById("helpLink").innerHTML = "Back to Feed";
 	}else{
 		helpToggle = false;
+		document.getElementById("feedTypeTitle").innerHTML = "JSON";
+		$("#newFeed").css("display", "inline");
+		document.getElementById("helpLink").innerHTML = "Help";
 		updateFeed();
 	}
 }
@@ -293,7 +298,9 @@ function updateFeed(){
 			    }else if(itemType == "age"){
 			    	var age = 0;
 			    	if(itemDetail == "cd"){
-			    		age = Math.floor((Math.random() * 17) + 1);
+			    		age = Math.floor((Math.random() * 12) + 1);
+			    	}else if(itemDetail == "tn"){
+			    		age = Math.floor((Math.random() * 4) + 13);
 			    	}else if(itemDetail == "sn"){
 			    		age = Math.floor((Math.random() * 26) + 64);
 			    	}else{
