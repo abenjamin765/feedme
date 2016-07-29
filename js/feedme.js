@@ -2,6 +2,7 @@
 // CODE WRITTEN BY MARC MUELLER (@seven11nash)
 
 // INITIAL VARIABLES
+var outputType = "JSON";
 var feedName = "feedMe";
 var itemArray = [];
 var itemDetailArray = [];
@@ -24,6 +25,24 @@ function generateUniqueURL(){
 // CAMELCASING FEEDNAME
 String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
+}
+
+// UPDATE OUTPUT
+function updateOutput(){
+
+	var selectedValueField = document.getElementById("valueTypeSelection");
+	var type = selectedValueField.options[selectedValueField.selectedIndex].value;
+
+	document.getElementById("feedTypeTitle").innerHTML = type;
+
+	if(type == "XML"){
+		document.getElementById("feedNameLabel").innerHTML = "Primary Tag Name";
+		document.getElementById("itemNumberLabel").innerHTML = "# of secondary tags";
+	}else{
+		document.getElementById("feedNameLabel").innerHTML = "Feed Name";
+		document.getElementById("itemNumberLabel").innerHTML = "# of items";
+	}
+
 }
 
 // FEED NAME HANDLE
@@ -182,9 +201,9 @@ function newFeed(){
 	itemDetailArray = ["us"];
 	valueArray = ["0", "1"];
 	gender = "both";
+	helpToggle = false;
 	document.getElementById("valueTypeSelection").value = "firstName";
 	document.getElementById("both").checked = true;
-	helpToggle = false;
 
 	$("#itemNumber").val(valueArray.length);
 	$("#feedName").val(feedName);
