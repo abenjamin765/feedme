@@ -262,9 +262,9 @@ function updateFeed(){
 
 	    	var usPhone = chance.phone({ country: 'us', mobile: true });
 	    	var ukPhone = chance.phone({ country: 'uk', mobile: true });
-	    	var dePhoneOptions = ["175", "176", "177"];
-	    	var randomOption = Math.floor((Math.random() * 3));
-	    	var dePhone = "0" +  dePhoneOptions[randomOption] + "&nbsp;" + generateRandomNumber(7);
+	    	var dePhoneOptions = ["0150", "0151", "0160", "0170", "0171", "0175", "0152", "0162", "0172", "0173", "0174", "0155", "0163", "0177", "0178", "0159", "0176", "0179", "0161", "0167", "0164", "0168", "0169"];
+	    	var randomOption = Math.floor((Math.random() * dePhoneOptions.length));
+	    	var dePhone = dePhoneOptions[randomOption] + "&nbsp;" + generateRandomNumber(7);
 
 			finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<span>fullName</span>": "' + fullName + '"';
 
