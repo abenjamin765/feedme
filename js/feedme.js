@@ -2,12 +2,11 @@
 // CODE WRITTEN BY MARC MUELLER (@seven11nash)
 
 // INITIAL VARIABLES
-var feedName = "Feed";
+var feedName = "feed";
 var itemArray = [];
 var itemDetailArray = [];
 var valueArray = ["0", "1"];
 var gender = "both";
-var selectedValue = "firstName";
 var helpToggle = false;
 
 // CODE GEN FOR LINK
@@ -22,14 +21,29 @@ function generateUniqueURL(){
 	document.getElementById("path--field").value = uniqueURL;
 }
 
+// CAMELCASING FEEDNAME
+String.prototype.capitalize = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+}
+
 // FEED NAME HANDLE
 $('#feedName').focusin('input',function(e){
 	$("#feedName").keyup(function() {
 		setTimeout(function(){
 
 			var value = $("#feedName").val();
-			value = value.split(' ').join('');
 			value = value.replace(/[^A-Za-z\s!?]/g,'');
+			value = value.toLowerCase();
+			var words = value.split(' ');
+			var numberOfWords = words.length;
+			value = "";
+			for(var i = 0;i < numberOfWords;i+=1){
+				if(i == 0){
+					value = value + words[i].toLowerCase();
+				}else{
+					value = value + words[i].capitalize();
+				}	
+			}
 
 		    if(value != ""){
 		  		feedName = value;
@@ -57,6 +71,9 @@ $('#feedName').focusout('input',function(e){
 // VALUES
 function addValue(){
 
+	var selectedValueField = document.getElementById("valueTypeSelection");
+	var selectedValue = selectedValueField.options[selectedValueField.selectedIndex].value;
+
 	var id = itemArray.length;
 
 	itemArray.push(selectedValue);
@@ -83,8 +100,15 @@ function removeValue(id){
 	}else{
 		itemArray.splice(id, 1);
 		itemDetailArray.splice(id, 1);
-		document.getElementById("valueBlock" + id).outerHTML = "";
-		delete document.getElementById(id);
+		document.getElementById("valueWrapper").innerHTML = "";
+		for(var i = 0;i < itemArray.length;i+=1){
+			if(itemArray[i] == "phone"){
+				$("#valueWrapper").append('<section class="block" id="valueBlock' + i +'"><a href="javascript:removeValue(' + i + ')" class="close">✕</a><span class="node-name">' + itemArray[i] + '</span><input type="checkbox" id="phoneNumber" name="toggles" class="toggle-switch" checked><label class="toggle" for="phoneNumber"><span></span></label><div class="options"><div class="options--frame"><span class="eyebrow">Country</span><ul class="radio-list"><li><input type="radio" name="phone" id="us" checked><label for="both">US</label></li><li><input type="radio" name="phone" id="uk"><label for="male">UK</label></li><li><input type="radio" name="phone" id="de"><label for="female">DE</label></li></ul></div></div></section>');
+				document.getElementById(itemDetailArray[i]).checked = true;
+			}else{
+				$("#valueWrapper").append('<section class="block" id="valueBlock' + i +'"><a href="javascript:removeValue(' + i + ')" class="close">✕</a><span class="node-name">' + itemArray[i] + '</span></section>');
+			}
+		}
 	}
 
 	updateFeed();
@@ -130,11 +154,12 @@ $('#itemNumber').focusout('input',function(e){
 
 // RESET FEED
 function newFeed(){
-	feedName = "Feed";
+	feedName = "feed";
 	itemArray = ["phone"];
 	itemDetailArray = ["us"];
 	valueArray = ["0", "1"];
 	gender = "both";
+	document.getElementById("valueTypeSelection").value = "firstName";
 	helpToggle = false;
 
 	$("#itemNumber").val(valueArray.length);

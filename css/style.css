@@ -142,6 +142,7 @@ Buttons
 	font-weight: 400;
 	z-index: 2;
 	position: relative;
+	cursor: pointer;
 }
 
 

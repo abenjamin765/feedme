@@ -20,7 +20,7 @@
 
 			<!-- Feed Name -->
 			<label for="feedName" class="eyebrow">Feed Name</label>
-			<input type="text" id="feedName" value="Feed" placeholder="Name your feed">
+			<input type="text" id="feedName" value="feed" placeholder="Name your feed">
 
 			<!-- # of items -->
 			<section class="block">
@@ -31,11 +31,12 @@
 			<section class="block">
 				<label for="type" class="eyebrow">Type</label>
 				<div class="drop-down">
-					<select>
-						<option value="fullName">fullName</option>
+					<select id="valueTypeSelection">
 						<option value="firstName">firstName</option>
 						<option value="lastName">lastName</option>
-						<option value="emailAddress">emailAddress</option>
+						<option value="email">email</option>
+						<option value="twitterHandle">twitterHandle</option>
+						<option value="phone">phone</option>
 					</select>
 				</div>
 				<a href="javascript:addValue()" class="btn btn-add" style="margin: 0px;">Add Value</a>
