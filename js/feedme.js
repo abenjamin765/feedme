@@ -84,7 +84,7 @@ function addValue(){
 	}
 
 	if(selectedValue == "phone"){
-		$("#valueWrapper").append('<section class="block" id="valueBlock' + id +'"><a href="javascript:removeValue(' + id + ')" class="close">✕</a><span class="node-name">' + selectedValue + '</span><input type="checkbox" id="phoneNumber" name="toggles" class="toggle-switch" checked><label class="toggle" for="phoneNumber"><span></span></label><div class="options"><div class="options--frame"><span class="eyebrow">Country</span><ul class="radio-list"><li><input type="radio" name="phone" id="us" checked><label for="both">US</label></li><li><input type="radio" name="phone" id="uk"><label for="male">UK</label></li><li><input type="radio" name="phone" id="de"><label for="female">DE</label></li></ul></div></div></section>');
+		$("#valueWrapper").append('<section class="block" id="valueBlock' + id +'"><a href="javascript:removeValue(' + id + ')" class="close">✕</a><span class="node-name">' + selectedValue + '</span><input type="checkbox" id="phoneNumber' + id + '" name="toggles" class="toggle-switch" checked><label class="toggle" for="phoneNumber' + id + '"><span></span></label><div class="options"><div class="options--frame"><span class="eyebrow">Country</span><ul class="radio-list"><li><input type="radio" name="phone' + id + '" id="us" checked><label for="us' + id + '">US</label></li><li><input type="radio" name="phone' + id + '" id="uk' + id + '"><label for="uk">UK</label></li><li><input type="radio" name="phone' + id + '" id="de' + id + '"><label for="de">DE</label></li></ul></div></div></section>');
 	}else{
 		$("#valueWrapper").append('<section class="block" id="valueBlock' + id +'"><a href="javascript:removeValue(' + id + ')" class="close">✕</a><span class="node-name">' + selectedValue + '</span></section>');
 	}
@@ -103,8 +103,8 @@ function removeValue(id){
 		document.getElementById("valueWrapper").innerHTML = "";
 		for(var i = 0;i < itemArray.length;i+=1){
 			if(itemArray[i] == "phone"){
-				$("#valueWrapper").append('<section class="block" id="valueBlock' + i +'"><a href="javascript:removeValue(' + i + ')" class="close">✕</a><span class="node-name">' + itemArray[i] + '</span><input type="checkbox" id="phoneNumber" name="toggles" class="toggle-switch" checked><label class="toggle" for="phoneNumber"><span></span></label><div class="options"><div class="options--frame"><span class="eyebrow">Country</span><ul class="radio-list"><li><input type="radio" name="phone" id="us" checked><label for="both">US</label></li><li><input type="radio" name="phone" id="uk"><label for="male">UK</label></li><li><input type="radio" name="phone" id="de"><label for="female">DE</label></li></ul></div></div></section>');
-				document.getElementById(itemDetailArray[i]).checked = true;
+				$("#valueWrapper").append('<section class="block" id="valueBlock' + i +'"><a href="javascript:removeValue(' + i + ')" class="close">✕</a><span class="node-name">' + itemArray[i] + '</span><input type="checkbox" id="phoneNumber' + i + '" name="toggles" class="toggle-switch" checked><label class="toggle" for="phoneNumber' + i + '"><span></span></label><div class="options"><div class="options--frame"><span class="eyebrow">Country</span><ul class="radio-list"><li><input type="radio" name="phone' + i + '" id="us' + i + '" checked><label for="us">US</label></li><li><input type="radio" name="phone' + i + '" id="uk' + i + '"><label for="uk">UK</label></li><li><input type="radio" name="phone' + i + '" id="de"><label for="de' + i + '">DE</label></li></ul></div></div></section>');
+				document.getElementById(itemDetailArray[i] + i).checked = true;
 			}else{
 				$("#valueWrapper").append('<section class="block" id="valueBlock' + i +'"><a href="javascript:removeValue(' + i + ')" class="close">✕</a><span class="node-name">' + itemArray[i] + '</span></section>');
 			}
@@ -230,6 +230,12 @@ function updateFeed(){
 	    	lastName = lastName.split(' ')[1];
 	    	firstPlusLast = firstName + lastName;
 
+	    	var emailVerified = chance.bool({likelihood: 60});
+
+	    	var usPhone = chance.phone({ country: 'us', mobile: true });
+	    	var ukPhone = chance.phone({ country: 'uk', mobile: true });
+	    	var dePhone = chance.phone({ country: 'de', mobile: true });
+
 			finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<span>fullName</span>": "' + fullName + '"';
 
 			if(itemArray.length == 0){
@@ -247,21 +253,28 @@ function updateFeed(){
 			    }else if(itemType == "lastName"){
 					name = fullName.split(' ')[1];
 					finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<span>lastName</span>": "' + name + '"';
+			    }else if(itemType == "username"){
+			    	var username = firstPlusLast;
+					finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<span>username</span>": "' + username + '"';
 			    }else if(itemType == "email"){
 			    	var email = firstPlusLast + "@example.com";
 					finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<span>email</span>": "' + email + '"';
+			    }else if(itemType == "emailVerified"){
+					finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<span>emailVerified</span>": ' + emailVerified;
 			    }else if(itemType == "twitterHandle"){
 			    	var username = "@" + firstPlusLast;
 					finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<span>twitterHandle</span>": "' + username + '"';
 			    }else if(itemType == "phone"){
 			    	if(itemDetail == "uk"){
-			    		var phone = chance.phone({ country: 'uk', mobile: true });
+			    		var phone = ukPhone;
+			    		finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<span>ukPhone</span>": "' + phone + '"';
 			    	}else if(itemDetail == "de"){
-			    		var phone = chance.phone({ country: 'de', mobile: true });
+			    		var phone = dePhone;
+			    		finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<span>dePhone</span>": "' + phone + '"';
 			    	}else{
-			    		var phone = chance.phone({ country: 'us', mobile: true });
+			    		var phone = usPhone;
+			    		finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<span>usPhone</span>": "' + phone + '"';
 			    	}
-					finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<span>phone</span>": "' + phone + '"';
 			    }
 			    if(j+1 == itemArray.length){
 					finalJSON = finalJSON + '<br>';
