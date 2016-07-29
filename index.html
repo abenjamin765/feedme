@@ -23,14 +23,21 @@
 			<input type="text" id="feedName" value="Feed" placeholder="Name your feed">
 
 			<!-- # of items -->
-			<section class="block" style="border-top: none; margin-top: -20px;">
+			<section class="block">
 				<label for="itemNumber" class="eyebrow"># of items</label>
 				<input type="text" id="itemNumber" class="number" value="2">
 			</section>
 			
 			<section class="block">
 				<label for="type" class="eyebrow">Type</label>
-				<a href="#" class="drop-down" style="margin-bottom: 10px;">First Name</a>
+				<div class="drop-down">
+					<select>
+						<option value="fullName">fullName</option>
+						<option value="firstName">firstName</option>
+						<option value="lastName">lastName</option>
+						<option value="emailAddress">emailAddress</option>
+					</select>
+				</div>
 				<a href="javascript:addValue()" class="btn btn-add" style="margin: 0px;">Add Value</a>
 			</section>
 
