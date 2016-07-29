@@ -9,6 +9,11 @@ var valueArray = ["0", "1"];
 var gender = "both";
 var helpToggle = false;
 
+$.getJSON( "js/users.json", function( json ) {
+	json = JSON.parse(json);
+    console.log( "JSON Data: " + json.users[ 1 ].fullName);
+});
+
 // CODE GEN FOR LINK
 function generateUniqueURL(){
 	var code = "";
@@ -18,7 +23,7 @@ function generateUniqueURL(){
 	    code += possible.charAt(Math.floor(Math.random() * possible.length));
 
 	var uniqueURL = "http://feed.me/" + code;
-	document.getElementById("path--field").value = uniqueURL;
+	// document.getElementById("path--field").value = uniqueURL;
 }
 
 function generateRandomNumber(digits){
@@ -202,7 +207,7 @@ function newFeed(){
 function toggleHelp(){
 	if(helpToggle == false){
 		helpToggle = true;
-		var helpText = "<b>Welcome to Feed.Me help</b><br>Note: To go back to your feed press the help button again<br><br><b>What is Feed.Me for?</b><br>Feed.Me is a tool for developers and designers, you can simply and easily generate spoof JSON data, which is hosted on Feed.Me or you can download as a json file. This helps prototyping and testing if your code would work with real JSON data.";
+		var helpText = '<b>Welcome to Feed.Me help</b><br>Note: To go back to your feed press the help button again<br><br><b>What is Feed.Me for?</b><br>Feed.Me is a tool for developers and designers, you can simply and easily generate spoof JSON data, which is hosted on Feed.Me or you can download as a json file. This helps prototyping and testing if your code would work with real JSON data.<br><br><b>How do I pull data from the downloaded json? (Js)</b><br>$.getJSON("path/to/feed.json", function(json) {<br>&nbsp;&nbsp;json = JSON.parse(json);<br>&nbsp;&nbsp;console.log("JSON Data: " + json.users[1].fullName);<br>});';
 		document.getElementById("codeField").innerHTML = helpText;
 	}else{
 		helpToggle = false;
@@ -233,13 +238,13 @@ function updateFeed(){
 		var finalJSON = "";
 		var beginning = "";
 
-		beginning = '{<br>&nbsp;&nbsp;"<span>' + feedName + '</span>": [<br>&nbsp;&nbsp;&nbsp;&nbsp;{<br>';
+		beginning = '{<br>"<span>' + feedName + '</span>": [<br>';
 		finalJSON = beginning;
 
 		valueAmount = valueArray.length;
 		for(var i = 0; i < valueArray.length; i+=1){
 
-			finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<span>' + i + '</span>": {<br>';
+			finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;{<br>';
 
 			var fullName = "";
 			if(gender == "male"){
@@ -266,7 +271,7 @@ function updateFeed(){
 	    	var randomOption = Math.floor((Math.random() * dePhoneOptions.length));
 	    	var dePhone = dePhoneOptions[randomOption] + "&nbsp;" + generateRandomNumber(7);
 
-			finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<span>fullName</span>": "' + fullName + '"';
+			finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<span>fullName</span>": "' + fullName + '"';
 
 			if(itemArray.length == 0){
 				finalJSON = finalJSON + '<br>';
@@ -279,31 +284,31 @@ function updateFeed(){
 				var itemDetail = itemDetailArray[j];
 			    if(itemType == "firstName"){
 					name = fullName.substring(0, fullName.indexOf(' '));
-					finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<span>firstName</span>": "' + name + '"';
+					finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<span>firstName</span>": "' + name + '"';
 			    }else if(itemType == "lastName"){
 					name = fullName.split(' ')[1];
-					finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<span>lastName</span>": "' + name + '"';
+					finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<span>lastName</span>": "' + name + '"';
 			    }else if(itemType == "username"){
 			    	var username = firstPlusLast;
-					finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<span>username</span>": "' + username + '"';
+					finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<span>username</span>": "' + username + '"';
 			    }else if(itemType == "email"){
 			    	var email = firstPlusLast + "@example.com";
-					finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<span>email</span>": "' + email + '"';
+					finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<span>email</span>": "' + email + '"';
 			    }else if(itemType == "emailVerified"){
-					finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<span>emailVerified</span>": ' + emailVerified;
+					finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<span>emailVerified</span>": ' + emailVerified;
 			    }else if(itemType == "twitterHandle"){
 			    	var username = "@" + firstPlusLast;
-					finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<span>twitterHandle</span>": "' + username + '"';
+					finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<span>twitterHandle</span>": "' + username + '"';
 			    }else if(itemType == "phone"){
 			    	if(itemDetail == "uk"){
 			    		var phone = ukPhone;
-			    		finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<span>ukPhone</span>": "' + phone + '"';
+			    		finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<span>ukPhone</span>": "' + phone + '"';
 			    	}else if(itemDetail == "de"){
 			    		var phone = dePhone;
-			    		finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<span>dePhone</span>": "' + phone + '"';
+			    		finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<span>dePhone</span>": "' + phone + '"';
 			    	}else{
 			    		var phone = usPhone;
-			    		finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<span>usPhone</span>": "' + phone + '"';
+			    		finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<span>usPhone</span>": "' + phone + '"';
 			    	}
 			    }
 			    if(j+1 == itemArray.length){
@@ -313,7 +318,7 @@ function updateFeed(){
 				}
 			}
 
-			finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}';
+			finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;}';
 
 			if(i+1 == valueArray.length){
 				finalJSON = finalJSON + '<br>';
@@ -325,9 +330,19 @@ function updateFeed(){
 		if(valueAmount == 0){
 			finalJSON = finalJSON + '<br>';
 		}
-		var end = "&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;]<br>}";
+		var end = "]<br>}";
 		finalJSON = finalJSON + end;
 		document.getElementById("codeField").innerHTML = finalJSON;
+
+		// DOWNLOAD JSON
+		finalJSON = finalJSON.split('&nbsp;').join('');
+		finalJSON = finalJSON.split('<span>').join('');
+		finalJSON = finalJSON.split('</span>').join('');
+		finalJSON = finalJSON.split('<br>').join('');
+		data = finalJSON;
+		data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(data));
+		document.getElementById("implementField").innerHTML = "";
+		$('#implementField').append('<input type="text" id="path--field" value="Download as a JSON file" readonly><a href="data:' + data + '" download="' + feedName + '.json">Download</a>');
 
 	}
 }
