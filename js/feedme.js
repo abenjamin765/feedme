@@ -3,9 +3,11 @@
 
 // INITIAL VARIABLES
 var feedName = "Feed";
-var itemArray = ["fullName", "firstName", "lastName", "email", "twitterHandle", "phone"];
-var itemDetailArray = ["both", "male", "none", "none", "none", "uk"];
+var itemArray = [];
+var itemDetailArray = [];
 var valueArray = ["0", "1"];
+var gender = "both";
+var selectedValue = "firstName";
 var helpToggle = false;
 
 // CODE GEN FOR LINK
@@ -54,13 +56,38 @@ $('#feedName').focusout('input',function(e){
 
 // VALUES
 function addValue(){
-	
 
+	var id = itemArray.length;
+
+	itemArray.push(selectedValue);
+	if(selectedValue == "phone"){
+		itemDetailArray.push("us");
+	}else{
+		itemDetailArray.push("none");
+	}
+
+	if(selectedValue == "phone"){
+		$("#valueWrapper").append('<section class="block" id="valueBlock' + id +'"><a href="javascript:removeValue(' + id + ')" class="close">✕</a><span class="node-name">' + selectedValue + '</span><input type="checkbox" id="phoneNumber" name="toggles" class="toggle-switch" checked><label class="toggle" for="phoneNumber"><span></span></label><div class="options"><div class="options--frame"><span class="eyebrow">Country</span><ul class="radio-list"><li><input type="radio" name="phone" id="us" checked><label for="both">US</label></li><li><input type="radio" name="phone" id="uk"><label for="male">UK</label></li><li><input type="radio" name="phone" id="de"><label for="female">DE</label></li></ul></div></div></section>');
+	}else{
+		$("#valueWrapper").append('<section class="block" id="valueBlock' + id +'"><a href="javascript:removeValue(' + id + ')" class="close">✕</a><span class="node-name">' + selectedValue + '</span></section>');
+	}
+
+	updateFeed();
 }
 
-function removeValue(){
+function removeValue(id){
+	if(id == "all"){
+		itemArray = [];
+		itemDetailArray = [];
+		document.getElementById("valueWrapper").innerHTML = "";
+	}else{
+		itemArray.splice(id, 1);
+		itemDetailArray.splice(id, 1);
+		document.getElementById("valueBlock" + id).outerHTML = "";
+		delete document.getElementById(id);
+	}
 
-
+	updateFeed();
 }
 
 // ITEM NUMBER
@@ -104,14 +131,16 @@ $('#itemNumber').focusout('input',function(e){
 // RESET FEED
 function newFeed(){
 	feedName = "Feed";
-	itemArray = ["fullName", "firstName", "lastName", "email", "twitter", "phone"];
-	itemDetailArray = ["both", "male", "none", "none", "none", "uk"];
+	itemArray = ["phone"];
+	itemDetailArray = ["us"];
 	valueArray = ["0", "1"];
+	gender = "both";
 	helpToggle = false;
 
-	$("#itemNumber").val(itemArray.length);
+	$("#itemNumber").val(valueArray.length);
 	$("#feedName").val(feedName);
 
+	removeValue("all");
 	generateUniqueURL();
 	updateFeed();
 }
@@ -159,43 +188,45 @@ function updateFeed(){
 
 			finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<span>' + i + '</span>": {<br>';
 
+			var fullName = "";
+			if(gender == "male"){
+				fullName = chance.name({ gender: "male" });
+			}else if(gender == "female"){
+				fullName = chance.name({ gender: "female" });
+			}else{
+				fullName = chance.name();
+			}
+
+			var firstName = fullName;
+	    	firstName = firstName.substring(0, firstName.indexOf(' '));
+	    	firstName = firstName.toLowerCase();
+	    	firstName = firstName.charAt(0);
+	    	var lastName = fullName;
+	    	lastName = lastName.split(' ')[1];
+	    	firstPlusLast = firstName + lastName;
+
+			finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<span>fullName</span>": "' + fullName + '"';
+
+			if(itemArray.length == 0){
+				finalJSON = finalJSON + '<br>';
+			}else{
+				finalJSON = finalJSON + ',<br>';
+			}
+
 			for(var j = 0;j < itemArray.length;j+=1){
 				var itemType = itemArray[j];
 				var itemDetail = itemDetailArray[j];
-			    if(itemType == "fullName"){
-			    	if(itemDetail == "male"){
-			    		var name = chance.name({ gender: "male" });
-			    	}else if(itemDetail == "female"){
-			    		var name = chance.name({ gender: "female" });
-			    	}else{
-			    		var name = chance.name();
-			    	}
-					finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<span>Full Name</span>": "' + name + '"';
-			    }else if(itemType == "firstName"){
-			    	if(itemDetail == "male"){
-			    		var name = chance.name({ gender: "male" });
-			    	}else if(itemDetail == "female"){
-			    		var name = chance.name({ gender: "female" });
-			    	}else{
-			    		var name = chance.name();
-			    	}
-					name = name.substring(0, name.indexOf(' '));
+			    if(itemType == "firstName"){
+					name = fullName.substring(0, fullName.indexOf(' '));
 					finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<span>firstName</span>": "' + name + '"';
 			    }else if(itemType == "lastName"){
-			    	var name = chance.name();
-					name = name.split(' ')[1];
+					name = fullName.split(' ')[1];
 					finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<span>lastName</span>": "' + name + '"';
 			    }else if(itemType == "email"){
-			    	var firstName = chance.name();
-			    	firstName = firstName.substring(0, firstName.indexOf(' '));
-			    	firstName = firstName.toLowerCase();
-			    	firstName = firstName.charAt(0);
-			    	var lastName = chance.name();
-			    	lastName = lastName.split(' ')[1];
-			    	var email = firstName + lastName + "@example.com";
+			    	var email = firstPlusLast + "@example.com";
 					finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<span>email</span>": "' + email + '"';
 			    }else if(itemType == "twitterHandle"){
-			    	var username = chance.twitter();
+			    	var username = "@" + firstPlusLast;
 					finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<span>twitterHandle</span>": "' + username + '"';
 			    }else if(itemType == "phone"){
 			    	if(itemDetail == "uk"){
