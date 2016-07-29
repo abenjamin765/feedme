@@ -322,6 +322,8 @@ Block
 
 .block .options--frame{
 	margin-top: 20px;
+	border-left: solid 2px #eee;
+	padding-left: 15px;
 }
 
 
