@@ -18,24 +18,37 @@
 				<span class="sans">.me</span>
 			</h1>
 
+			<!-- OUTPUT TYPE -->
+			<!-- <label for="outputType" class="eyebrow">Output Type</label>
+			<div class="drop-down">
+				<select id="valueTypeSelection" onChange="updateOutput()">
+					<option value="JSON">JSON</option>
+					<option value="XML">XML</option>
+				</select>
+			</div> -->
+
 			<!-- Feed Name -->
-			<label for="feedName" class="eyebrow">Feed Name</label>
-			<input type="text" id="feedName" value="Feed" placeholder="Name your feed">
+			<label for="feedName" class="eyebrow" id="feedNameLabel">Feed Name</label>
+			<input type="text" id="feedName" placeholder="Name your feed">
 
 			<!-- # of items -->
 			<section class="block">
-				<label for="itemNumber" class="eyebrow"># of items</label>
+				<label for="itemNumber" class="eyebrow" id="itemNumberLabel"># of items</label>
 				<input type="text" id="itemNumber" class="number" value="2">
 			</section>
 			
 			<section class="block">
-				<label for="type" class="eyebrow">Type</label>
+				<label for="type" class="eyebrow">Value Type</label>
 				<div class="drop-down">
-					<select>
-						<option value="fullName">fullName</option>
+					<select id="valueTypeSelection">
 						<option value="firstName">firstName</option>
 						<option value="lastName">lastName</option>
-						<option value="emailAddress">emailAddress</option>
+						<option value="age">age</option>
+						<option value="username">username</option>
+						<option value="email">email</option>
+						<option value="emailVerified">emailVerified</option>
+						<option value="phone">phone</option>
+						<option value="twitterHandle">twitterHandle</option>
 					</select>
 				</div>
 				<a href="javascript:addValue()" class="btn btn-add" style="margin: 0px;">Add Value</a>
@@ -54,9 +67,9 @@
 						<!-- Gender	 -->
 						<span class="eyebrow">Gender</span>
 						<ul class="radio-list">
-							<li><input type="radio" name="gender" id="both" checked><label for="both">Both</label></li>
-							<li><input type="radio" name="gender" id="male"><label for="male">Male</label></li>
-							<li><input type="radio" name="gender" id="female"><label for="female">Female</label></li>
+							<li><input type="radio" name="gender" id="both" onclick="updateItemDetail(this.id)" checked><label for="both">Both</label></li>
+							<li><input type="radio" name="gender" onclick="updateItemDetail(this.id)" id="male"><label for="male">Male</label></li>
+							<li><input type="radio" name="gender" onclick="updateItemDetail(this.id)" id="female"><label for="female">Female</label></li>
 						</ul>
 
 					</div>
@@ -81,18 +94,18 @@
 		<!-- Main Stage -->
 		<main>
 			<div class="utility-bar">
-				<div  class="feed-type">JSON</div>
+				<div  class="feed-type" id="feedTypeTitle">JSON</div>
 				<nav>
-					<a href="javascript:newFeed()">New Feed</a>
-					<a href="javascript:toggleHelp()">Help</a>
+					<a href="javascript:newFeed()" id="newFeed">New Feed</a>
+					<a href="javascript:toggleHelp()" id="helpLink">Help</a>
 				</nav>
 			</div>
 			<pre class="slab">
 				<code id="codeField"></code>
 			</pre>
-			<div class="path">
-				<input type="text" id="path--field" readonly>
-				<a href="#" id="copyButton" onclick="copyLink()">Copy</a>
+			<div class="path" id="implementField">
+				<!-- <input type="text" id="path--field" value="Download as a JSON file" readonly> -->
+				<!-- <a href="#" id="copyButton" onclick="copyLink()">Copy</a> -->
 			</div>	
 		</main>
 		<div class="footer"><hr><p>Created by <a target="blank_" href="https://twitter.com/aBenjamin765">@aBenjamin765</a> and <a target="blank_" href="https://twitter.com/seven11nash">@seven11nash</a></p></div>

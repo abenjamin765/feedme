@@ -142,6 +142,7 @@ Buttons
 	font-weight: 400;
 	z-index: 2;
 	position: relative;
+	cursor: pointer;
 }
 
 
@@ -175,6 +176,7 @@ Side Bar
 	font-size: 100px;
 	text-transform: lowercase;
 }
+
 .logo .sans{
 	font-size: 26px;	
 	bottom: 26px;
@@ -188,6 +190,7 @@ Side Bar
 	display: block;
 	margin-bottom: 10px;
 	letter-spacing: 0.1em;
+	margin-top: 20px;
 }
 
 .side-bar input[type="text"]{
@@ -203,6 +206,7 @@ Side Bar
 	display: block;
 	background: none;
 }
+
 .side-bar input[type="text"]:focus{
 	outline: none;
 	border-color: #FF0078;
@@ -218,6 +222,7 @@ Side Bar
 	margin: 10px 0;	
 	position: relative;
 }
+
 .split span{
 	background: #f4f4f4;
 	z-index: 23;
@@ -258,6 +263,7 @@ Block
 
 .block .eyebrow{
 	color: #999;
+	margin-top: 0px;
 }
 
 .block input[type="text"]{
@@ -322,15 +328,14 @@ Block
 
 .block .options--frame{
 	margin-top: 20px;
+	border-left: solid 2px #eee;
+	padding-left: 15px;
 }
-
 
 .toggle-switch:checked ~ .options{
 	display: block;
-	height: 120px;
+	height: auto;
 }
-
-
 
 .block .toggle{
 	float: right;	
