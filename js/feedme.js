@@ -21,16 +21,6 @@ function generateUniqueURL(){
 	// document.getElementById("path--field").value = uniqueURL;
 }
 
-function generateRandomNumber(digits){
-	var code = "";
-	var possible = "0123456789";
-
-	for( var i=0; i < digits; i++ )
-	    code += possible.charAt(Math.floor(Math.random() * possible.length));
-
-	return code;
-}
-
 // CAMELCASING FEEDNAME
 String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
@@ -275,8 +265,8 @@ function updateFeed(){
 	    	var usPhone = chance.phone({ country: 'us', mobile: true });
 	    	var ukPhone = chance.phone({ country: 'uk', mobile: true });
 	    	var dePhoneOptions = ["0150", "0151", "0160", "0170", "0171", "0175", "0152", "0162", "0172", "0173", "0174", "0155", "0163", "0177", "0178", "0159", "0176", "0179", "0161", "0167", "0164", "0168", "0169"];
-	    	var randomOption = Math.floor((Math.random() * dePhoneOptions.length));
-	    	var dePhone = dePhoneOptions[randomOption] + "&nbsp;" + generateRandomNumber(7);
+	    	var randomOption = chance.integer({min: 1, max: dePhoneOptions.length});
+	    	var dePhone = dePhoneOptions[randomOption] + "&nbsp;" + chance.integer({min: 1000000, max: 9999999});
 
 			finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<span>fullName</span>": "' + fullName + '"';
 
@@ -298,13 +288,13 @@ function updateFeed(){
 			    }else if(itemType == "age"){
 			    	var age = 0;
 			    	if(itemDetail == "cd"){
-			    		age = Math.floor((Math.random() * 12) + 1);
+			    		age = chance.integer({min: 1, max: 12});
 			    	}else if(itemDetail == "tn"){
-			    		age = Math.floor((Math.random() * 4) + 13);
+			    		age = chance.integer({min: 13, max: 17});
 			    	}else if(itemDetail == "sn"){
-			    		age = Math.floor((Math.random() * 26) + 64);
+			    		age = chance.integer({min: 62, max: 95});
 			    	}else{
-			    		age = Math.floor((Math.random() * 45) + 18);
+			    		age = chance.integer({min: 18, max: 61});
 			    	}
 			    	finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<span>age</span>": ' + age;
 			    }else if(itemType == "username"){
