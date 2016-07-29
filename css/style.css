@@ -67,7 +67,7 @@ body{
 /*-----------------
 Buttons
 -----------------*/
-.btn, .drop-down{
+.btn{
 	display: block;
 	padding: 13px;
 	width: 100%;
@@ -112,13 +112,36 @@ Buttons
 	color: #333;
 	background: white;
 	text-align: left;
-	margin-bottom: 20px;
+	margin-bottom: 10px;
+	position: relative;
+	border: solid 1px #ccc;
+	/*border-radius: 2px;*/
 }
 .drop-down:after{
 	content: '▾';
 	background: none;
 	font-size: 14px;
 	line-height: 40px;
+	z-index: 1;
+}
+
+.drop-down select{
+	width: 100%;
+	border: none;
+    box-shadow: none;
+    background-color: transparent;
+    background-image: none;
+    -webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	border-radius: 2px;
+	line-height: 40px;
+	padding-left: 13px;
+	font-family: 'Open Sans', arial, sans-serif;
+	font-size: 14px;
+	font-weight: 400;
+	z-index: 2;
+	position: relative;
 }
 
 
@@ -164,6 +187,7 @@ Side Bar
 	text-transform: uppercase;
 	display: block;
 	margin-bottom: 10px;
+	letter-spacing: 0.1em;
 }
 
 .side-bar input[type="text"]{
@@ -175,7 +199,7 @@ Side Bar
 	font-weight: 300;
 	color: #FF0078;
 	line-height: 27px;
-	margin: 0 0 20px;
+	margin: 0;
 	display: block;
 	background: none;
 }
@@ -223,9 +247,13 @@ Block
 -----------------*/
 
 .block{
-	padding: 20px 10px;
-	border-top: solid 1px #ccc;
 	overflow: hidden;
+	padding: 20px 0;
+	border-bottom: solid 1px #ccc;
+
+}
+.block + .block{
+	
 }
 
 .block .eyebrow{
@@ -302,10 +330,7 @@ Block
 	height: 120px;
 }
 
-.block .drop-down{
-	border: solid 1px #ccc;
-	box-shadow: none;
-}
+
 
 .block .toggle{
 	float: right;	
@@ -397,6 +422,22 @@ main .slab b{
 main .slab #codeField{
 	overflow-y: scroll;
 	height: 500px;
+}
+
+
+main .slab #codeField::-webkit-scrollbar {
+    width: 0.5em;
+}
+ 
+main .slab #codeField::-webkit-scrollbar-track {
+    -webkit-box-shadow: none;
+    background-color: #1A1A1A;
+}
+ 
+main .slab #codeField::-webkit-scrollbar-thumb {
+  background-color: #4D4D4D;
+  outline: none;
+
 }
 
 main .path{
