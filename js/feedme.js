@@ -21,6 +21,16 @@ function generateUniqueURL(){
 	document.getElementById("path--field").value = uniqueURL;
 }
 
+function generateRandomNumber(digits){
+	var code = "";
+	var possible = "0123456789";
+
+	for( var i=0; i < digits; i++ )
+	    code += possible.charAt(Math.floor(Math.random() * possible.length));
+
+	return code;
+}
+
 // CAMELCASING FEEDNAME
 String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
@@ -84,7 +94,7 @@ function addValue(){
 	}
 
 	if(selectedValue == "phone"){
-		$("#valueWrapper").append('<section class="block" id="valueBlock' + id +'"><a href="javascript:removeValue(' + id + ')" class="close">✕</a><span class="node-name">' + selectedValue + '</span><input type="checkbox" id="phoneNumber' + id + '" name="toggles" class="toggle-switch" checked><label class="toggle" for="phoneNumber' + id + '"><span></span></label><div class="options"><div class="options--frame"><span class="eyebrow">Country</span><ul class="radio-list"><li><input type="radio" name="phone' + id + '" id="us" checked><label for="us' + id + '">US</label></li><li><input type="radio" name="phone' + id + '" id="uk' + id + '"><label for="uk">UK</label></li><li><input type="radio" name="phone' + id + '" id="de' + id + '"><label for="de">DE</label></li></ul></div></div></section>');
+		$("#valueWrapper").append('<section class="block" id="valueBlock' + id +'"><a href="javascript:removeValue(' + id + ')" class="close">✕</a><span class="node-name">' + selectedValue + '</span><input type="checkbox" id="phoneNumber' + id + '" name="toggles" class="toggle-switch" checked><label class="toggle" for="phoneNumber' + id + '"><span></span></label><div class="options"><div class="options--frame"><span class="eyebrow">Country</span><ul class="radio-list"><li><input type="radio" name="phone' + id + '" onclick="updateItemDetail(this.id)" id="us' + id + '" checked><label for="us">US</label></li><li><input type="radio" name="phone' + id + '" onclick="updateItemDetail(this.id)" id="uk' + id + '"><label for="uk">UK</label></li><li><input type="radio" name="phone' + id + '" onclick="updateItemDetail(this.id)" id="de' + id + '"><label for="de">DE</label></li></ul></div></div></section>');
 	}else{
 		$("#valueWrapper").append('<section class="block" id="valueBlock' + id +'"><a href="javascript:removeValue(' + id + ')" class="close">✕</a><span class="node-name">' + selectedValue + '</span></section>');
 	}
@@ -103,12 +113,29 @@ function removeValue(id){
 		document.getElementById("valueWrapper").innerHTML = "";
 		for(var i = 0;i < itemArray.length;i+=1){
 			if(itemArray[i] == "phone"){
-				$("#valueWrapper").append('<section class="block" id="valueBlock' + i +'"><a href="javascript:removeValue(' + i + ')" class="close">✕</a><span class="node-name">' + itemArray[i] + '</span><input type="checkbox" id="phoneNumber' + i + '" name="toggles" class="toggle-switch" checked><label class="toggle" for="phoneNumber' + i + '"><span></span></label><div class="options"><div class="options--frame"><span class="eyebrow">Country</span><ul class="radio-list"><li><input type="radio" name="phone' + i + '" id="us' + i + '" checked><label for="us">US</label></li><li><input type="radio" name="phone' + i + '" id="uk' + i + '"><label for="uk">UK</label></li><li><input type="radio" name="phone' + i + '" id="de"><label for="de' + i + '">DE</label></li></ul></div></div></section>');
+				$("#valueWrapper").append('<section class="block" id="valueBlock' + i +'"><a href="javascript:removeValue(' + i + ')" class="close">✕</a><span class="node-name">' + itemArray[i] + '</span><input type="checkbox" id="phoneNumber' + i + '" name="toggles" class="toggle-switch" checked><label class="toggle" for="phoneNumber' + i + '"><span></span></label><div class="options"><div class="options--frame"><span class="eyebrow">Country</span><ul class="radio-list"><li><input type="radio" name="phone' + i + '" onclick="updateItemDetail(this.id)" id="us' + i + '" checked><label for="us">US</label></li><li><input type="radio" name="phone' + i + '" onclick="updateItemDetail(this.id)" id="uk' + i + '"><label for="uk">UK</label></li><li><input type="radio" name="phone' + i + '" onclick="updateItemDetail(this.id)" id="de' + i + '"><label for="de">DE</label></li></ul></div></div></section>');
 				document.getElementById(itemDetailArray[i] + i).checked = true;
 			}else{
 				$("#valueWrapper").append('<section class="block" id="valueBlock' + i +'"><a href="javascript:removeValue(' + i + ')" class="close">✕</a><span class="node-name">' + itemArray[i] + '</span></section>');
 			}
 		}
+	}
+
+	updateFeed();
+}
+
+// VALUE OPTIONS
+function updateItemDetail(id){
+	if(id == "both"){
+		gender = "both";
+	}else if(id == "male"){
+		gender = "male";
+	}else if(id == "female"){
+		gender = "female";
+	}else{
+		var detail = id.substring(0,2);
+		var itemId = id.substr(2);
+		itemDetailArray[itemId] = detail;
 	}
 
 	updateFeed();
@@ -160,6 +187,7 @@ function newFeed(){
 	valueArray = ["0", "1"];
 	gender = "both";
 	document.getElementById("valueTypeSelection").value = "firstName";
+	document.getElementById("both").checked = true;
 	helpToggle = false;
 
 	$("#itemNumber").val(valueArray.length);
@@ -234,7 +262,9 @@ function updateFeed(){
 
 	    	var usPhone = chance.phone({ country: 'us', mobile: true });
 	    	var ukPhone = chance.phone({ country: 'uk', mobile: true });
-	    	var dePhone = chance.phone({ country: 'de', mobile: true });
+	    	var dePhoneOptions = ["175", "176", "177"];
+	    	var randomOption = Math.floor((Math.random() * 3));
+	    	var dePhone = "0" +  dePhoneOptions[randomOption] + "&nbsp;" + generateRandomNumber(7);
 
 			finalJSON = finalJSON + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<span>fullName</span>": "' + fullName + '"';
 

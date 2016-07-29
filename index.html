@@ -57,9 +57,9 @@
 						<!-- Gender	 -->
 						<span class="eyebrow">Gender</span>
 						<ul class="radio-list">
-							<li><input type="radio" name="gender" id="both" checked><label for="both">Both</label></li>
-							<li><input type="radio" name="gender" id="male"><label for="male">Male</label></li>
-							<li><input type="radio" name="gender" id="female"><label for="female">Female</label></li>
+							<li><input type="radio" name="gender" id="both" onclick="updateItemDetail(this.id)" checked><label for="both">Both</label></li>
+							<li><input type="radio" name="gender" onclick="updateItemDetail(this.id)" id="male"><label for="male">Male</label></li>
+							<li><input type="radio" name="gender" onclick="updateItemDetail(this.id)" id="female"><label for="female">Female</label></li>
 						</ul>
 
 					</div>
