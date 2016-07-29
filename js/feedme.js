@@ -9,11 +9,6 @@ var valueArray = ["0", "1"];
 var gender = "both";
 var helpToggle = false;
 
-$.getJSON( "js/users.json", function( json ) {
-	json = JSON.parse(json);
-    console.log( "JSON Data: " + json.users[ 1 ].fullName);
-});
-
 // CODE GEN FOR LINK
 function generateUniqueURL(){
 	var code = "";
