@@ -61,6 +61,7 @@ body{
 	font-family: 'Open Sans', sans-serif;
 	color: #333;
 	background: #f4f4f4;
+	overflow-y: scroll;
 }
 
 
@@ -334,7 +335,7 @@ Block
 
 .toggle-switch:checked ~ .options{
 	display: block;
-	height: auto;
+	height: 130px;
 }
 
 .block .toggle{
